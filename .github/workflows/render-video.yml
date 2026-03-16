@@ -15,6 +15,7 @@ on:
 jobs:
   render:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     
     steps:
       - name: Checkout code
@@ -30,11 +31,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y chromium-browser ffmpeg
 
-      - name: Create Remotion project
+      - name: Create and install Remotion project
         run: |
-          npx create-video@latest my-video --template=hello-world --y
+          npx --yes create-remotion@latest my-video --template hello-world
           cd my-video
-          npm install
+          npm install --prefer-offline
 
       - name: Render video
         run: |
@@ -48,4 +49,4 @@ jobs:
         with:
           name: rendered-video
           path: my-video/out/video.mp4
-          retention-days: 30
+          retention-days: 1
