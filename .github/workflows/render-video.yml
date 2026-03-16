@@ -31,11 +31,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y chromium-browser ffmpeg
 
-      - name: Create and install Remotion project
+      - name: Install dependencies
         run: |
-          npx --yes create-remotion@latest my-video --template hello-world
           cd my-video
-          npm install --prefer-offline
+          npm install
 
       - name: Render video
         run: |
